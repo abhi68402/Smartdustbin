@@ -1,22 +1,19 @@
-// Function to fetch data from the API
-async function fetchData() {
-    const apiURL = 'https://blynk.cloud/external/api/get?token=HGwAXJ8VGOw15Tt8ge2vTjncMwYFt2lj&V0';
-
-    try {
-        const response = await fetch(apiURL);
-        const data = await response.text();  // Assuming the response is plain text (a number in cm)
-
-        // Update the distance value in the HTML
-        document.getElementById('distance-value').innerText = `${data}`;  // Update the "distance" span
-
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        document.getElementById('distance-value').innerText = 'Error';
+fetch("https://blynk.cloud/external/api/get?token=HGwAXJ8VGOw15Tt8ge2vTjncMwYFt2lj&V0")
+  .then((response) => {
+    if (response.ok) {
+      return response.text();  // Using .text() since the data returned is not in JSON format but just a value
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR");
     }
+  })
+  .then(data => {
+    console.log(data); // For debugging
+    displayDistance(data);  // Call a function to display the distance
+  })
+  .catch((error) => console.error("FETCH ERROR:", error));
+
+// Function to display the fetched distance in your HTML
+function displayDistance(distance) {
+    // Assuming you want to update the distance in a specific HTML element
+    document.getElementById('distance-value').innerText = `${distance} cm`;
 }
-
-// Fetch data immediately when the page loads
-fetchData();
-
-// Set interval to fetch data every 5 seconds (5000 milliseconds)
-setInterval(fetchData, 5000);
