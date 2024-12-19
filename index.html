@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Smart Dustbin Management</title>
+	<style>
+	/* Global Styles */
+	body {
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 20px;
+	background-color: #f9fafb;
+	color: #333;
+	}
+	header {
+	background-color: #3b82f6; /* Modern Blue */
+	color: white;
+	text-align: center;
+	padding: 1em 0;
+	border-radius: 8px;
+	}
+	.container {
+	max-width: 1200px;
+	margin: auto;
+	}
+	
+	/* Navigation Menu */
+	nav {
+	background-color: #1e3a8a; /* Dark Blue */
+	padding: 10px;
+	border-radius: 8px;
+	}
+	
+	nav a {
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
+	padding: 10px 20px;
+	margin: 0 10px;
+	display: inline-block;
+	transition: color 0.3s ease;
+	}
+	
+	nav a:hover {
+	color: #60a5fa; /* Light Blue */
+	}
+	
+	/* Dustbin Cards */
+	.dustbin-card {
+	display: flex;
+	align-items: center;
+	background-color: #e5e7eb; /* Light Gray */
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	padding: 15px;
+	margin: 10px 0;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	}
+	.dustbin-card:hover {
+	transform: scale(1.03);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	}
+	.dustbin-card img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-right: 20px;
+	}
+	.dustbin-info {
+	flex: 1;
+	}
+	.dustbin-info h3 {
+	margin: 0;
+	font-size: 18px;
+	color: #1e3a8a; /* Dark Blue */
+	}
+	.dustbin-info p {
+	margin: 5px 0;
+	font-size: 14px;
+	color: #6b7280; /* Cool Gray */
+	}
+	.dustbin-status {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	}
+	.status-label {
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	text-transform: capitalize;
+	}
+	.low-status {
+	background-color: #facc15; /* Yellow */
+	}
+	.medium-status {
+	background-color: #fb923c; /* Orange */
+	}
+	.high-status {
+	background-color: #ef4444; /* Red */
+	}
+	.fill-level-bar {
+	width: 100px;
+	height: 10px;
+	background-color: #d1d5db;
+	border-radius: 5px;
+	overflow: hidden;
+	}
+	.fill-level-bar div {
+	height: 100%;
+	background-color: #60a5fa; /* Light Blue */
+	}
+	label {
+	font-size: 14px;
+	color: #333;
+	}
+	
+	/* Action Buttons */
+	.settings-section {
+	margin: 30px 0;
+	background-color: #f3f4f6; /* Soft Gray */
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+	
+	.settings-section h2 {
+	text-align: center;
+	color: #1e3a8a;
+	margin-bottom: 20px;
+	}
+	
+	.action-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	}
+	.action-buttons button {
+	background-color: #3b82f6; /* Modern Blue */
+	color: white;
+	border: none;
+	padding: 12px 25px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	}
+	.action-buttons button:hover {
+	background-color: #1e40af; /* Darker Blue */
+	transform: translateY(-2px);
+	}
+	.action-buttons button:active {
+	transform: translateY(0);
+	}
+	
+	/* Map Section */
+	.map-section {
+	margin: 20px 0;
+	}
+	iframe {
+	width: 100%;
+	height: 400px;
+	border: none;
+	border-radius: 8px;
+	}
+	
+	/* Optimized Route Button */
+	#optimizedRoute {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	padding: 12px 25px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	}
+	#optimizedRoute:hover {
+	background-color: #2980b9;
+	transform: translateY(-2px);
+	}
+	#optimizedRoute:active {
+	transform: translateY(0);
+	}
+	
+	/* Help and Support Section */
+	.help-support {
+	margin-top: 40px;
+	font-size: 16px;
+	background-color: #ecf0f1;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+	.help-support h3 {
+	font-size: 22px;
+	color: #34495e;
+	margin-bottom: 20px;
+	}
+	.help-support p {
+	font-size: 16px;
+	color: #7f8c8d;
+	}
+	.help-support .contact-btns {
+	margin-top: 20px;
+	}
+	.help-support button {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	padding: 12px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-right: 15px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	}
+	.help-support button:hover {
+	background-color: #2980b9;
+	transform: translateY(-2px);
+	}
+	.help-support button:active {
+	transform: translateY(0);
+	}
+	
+	</style>
+	</head>
+	<body>
+	<header>
+	<h1>Smart Dustbins</h1>
+	</header>
+	
+	<!-- Navigation Menu -->
+	<nav>
+	<a href="#dustbinInfo">Dustbin Info</a>
+	<a href="#maps">Maps</a>
+	<a href="#settings">Settings</a>
+	<a href="#helpSupport">Help and Support</a>
+	</nav>
+	<div id="dustbinList">
+	<div class="container">
+	<!-- Dustbin Cards -->
+	<h2 id="dustbinInfo">Dustbin Status</h2>
+	<div class="dustbin-card" data-fill="85">
+	<img src="https://www.bing.com/images/blob?bcid=r1y-ScL7e94HSw" alt="Dustbin Image">
+	<div class="dustbin-info">
+    <h3>Dustbin 1</h3>
+    <p>Location: Main Gate</p>
+</div>
+<div class="dustbin-status">
+    <span class="status-label high-status">High</span>
+    <p>Distance: <span id="distance-value">Loading...</span> cm</p> <!-- Add an ID here -->
+    <div class="fill-level-bar">
+        <div style="width: 85%;"></div>
+    </div>
+    <p>Waste Age: 2 days</p>
+    <input type="checkbox" id="selectDustbin1" data-lat="17.780001" data-lon="83.379001">
+    <label for="selectDustbin1">Select Dustbin</label>
+</div>
+
+	
+	<div class="dustbin-card" data-fill="65">
+	<img src="https://www.bing.com/images/blob?bcid=r1y-ScL7e94HSw" alt="Dustbin Image">
+	<div class="dustbin-info">
+	<h3>Dustbin 2</h3>
+	<p>Location: Cafeteria</p>
+	</div>
+	<div class="dustbin-status">
+	<span class="status-label medium-status">Medium</span>
+	<p>Fill Level: 65%</p>
+	<div class="fill-level-bar">
+	<div style="width: 65%;"></div>
+	</div>
+	<p>Waste Age: 1 day</p>
+	<input type="checkbox" id="selectDustbin2" data-lat="17.780239" data-lon="83.379707">
+	<label for="selectDustbin2">Select Dustbin</label>
+	</div>
+	</div>
+	
+	<div class="dustbin-card" data-fill="40">
+	<img src="https://www.bing.com/images/blob?bcid=r1y-ScL7e94HSw" alt="Dustbin Image">
+	<div class="dustbin-info">
+	<h3>Dustbin 3</h3>
+	<p>Location: Parking Area</p>
+	</div>
+	<div class="dustbin-status">
+	<span class="status-label low-status">Low</span>
+	<p>Fill Level: 40%</p>
+	<div class="fill-level-bar">
+	<div style="width: 40%;"></div>
+	</div>
+	<p>Waste Age: 3 days</p>
+	<input type="checkbox" id="selectDustbin3" data-lat="17.780657" data-lon="83.379901">
+	<label for="selectDustbin3">Select Dustbin</label>
+	</div>
+	</div>
+	
+	<div class="dustbin-card" data-fill="90">
+	<img src="https://www.bing.com/images/blob?bcid=r1y-ScL7e94HSw" alt="Dustbin Image">
+	<div class="dustbin-info">
+	<h3>Dustbin 4</h3>
+	<p>Location: Library</p>
+	</div>
+	<div class="dustbin-status">
+	<span class="status-label high-status">High</span>
+	<p>Fill Level: 90%</p>
+	<div class="fill-level-bar">
+	<div style="width: 90%;"></div>
+	</div>
+	<p>Waste Age: 2 days</p>
+	<input type="checkbox" id="selectDustbin4" data-lat="17.781000" data-lon="83.380500">
+	<label for="selectDustbin4">Select Dustbin</label>
+	</div>
+	</div>
+	
+	<div class="dustbin-card" data-fill="60">
+	<img src="https://www.bing.com/images/blob?bcid=r1y-ScL7e94HSw" alt="Dustbin Image">
+	<div class="dustbin-info">
+	<h3>Dustbin 5</h3>
+	<p>Location: Auditorium</p>
+	</div>
+	<div class="dustbin-status">
+	<span class="status-label medium-status">Medium</span>
+	<p>Fill Level: 60%</p>
+	<div class="fill-level-bar">
+	<div style="width: 60%;"></div>
+	</div>
+	<p>Waste Age: 4 days</p>
+	<input type="checkbox" id="selectDustbin5" data-lat="17.782500" data-lon="83.381000">
+	<label for="selectDustbin5">Select Dustbin</label>
+	</div>
+	</div>
+	
+	
+	<h2>Bins to Be Cleaned (Above 80% Fill)</h2>
+	<div id="dustbinsToBeCleaned"></div>
+	
+	<h2 id="maps">Optimized Route for Cleaning Bins</h2>
+	<button id="optimizedRoute" onclick="showOptimizedRoute()">Get Optimized Route</button>
+	<div class="map-section">
+	<iframe id="mapIframe" src="https://www.google.com/maps/d/embed?mid=1UJBv5938Wa8JN1n2x-qaDCNOHFFBpr4&usp=sharing" width="640" height="480"></iframe>
+	</div>
+	<h1>Settings</h1>
+	<div id="settings" class="action-buttons">
+	
+	<p>
+	<button id="addDustbinButton">Add Dustbin</button>
+	<button id="removeDustbinButton">Remove Dustbin</button>
+	</p>
+	</div>
+	<!-- Help and Support Section -->
+	<div id="helpSupport" class="help-support">
+	<h3>Help and Support</h3>
+	<p>Email: support@smartbins.in</p>
+	<p>Contact: 8919884369</p>
+	<p>Location: GITAM, Rushikonda, 530017</p>
+	
+	<div class="contact-btns">
+	<button onclick="window.location.href='tel:+918919884369'">Call Support</button>
+	<button onclick="window.location.href='mailto:support@smartbins.in'">Email Support</button>
+	<button onclick="window.location.href='https://www.google.com/maps?q=GITAM,+Rushikonda,+530017'">View Location</button>
+	</div>
+	</div>
+	
+	<script>
+	function showOptimizedRoute() {
+	navigator.geolocation.getCurrentPosition(
+	(position) => {
+	const userLat = position.coords.latitude;
+	const userLon = position.coords.longitude;
+	const origin = `${userLat},${userLon}`;
+	
+	const selectedDustbins = document.querySelectorAll('input[type=checkbox]:checked');
+	const coordinates = Array.from(selectedDustbins).map(checkbox => {
+	const lat = checkbox.getAttribute('data-lat');
+	const lon = checkbox.getAttribute('data-lon');
+	return `${lat},${lon}`;
+	});
+	
+	if (coordinates.length > 0) {
+	const destination = coordinates.pop();
+	const waypoints = coordinates.join('|');
+	
+	const baseUrl = 'https://www.google.com/maps/dir/?api=1&travelmode=driving';
+	let routeUrl = `${baseUrl}&origin=${origin}&destination=${destination}`;
+	if (waypoints) {
+	routeUrl += `&waypoints=${waypoints}`;
+	}
+	
+	window.open(routeUrl, '_blank');
+	} else {
+	alert('Please select at least one dustbin to view the optimized route.');
+	}
+	},
+	() => {
+	alert('Unable to fetch your current location. Please ensure location services are enabled.');
+	}
+	);
+	}
+	
+	// JavaScript to filter dustbins with fill level > 80%
+	window.onload = function() {
+	const dustbinCards = document.querySelectorAll('.dustbin-card');
+	const dustbinsToBeCleaned = document.getElementById('dustbinsToBeCleaned');
+	
+	dustbinCards.forEach(card => {
+	const fillLevel = parseInt(card.getAttribute('data-fill'));
+	if (fillLevel > 80) {
+	dustbinsToBeCleaned.appendChild(card.cloneNode(true)); // Add clone of card to cleaned section
+	}
+	});
+	}
+	
+	const dustbinList = document.getElementById('dustbinList');
+	
+	// Add Dustbin
+	document.getElementById('addDustbinButton').addEventListener('click', function () {
+	const number = prompt('Enter Dustbin Number:');
+	const location = prompt('Enter Dustbin Location:');
+	const longitude = prompt('Enter Dustbin Longitude:');
+	const latitude = prompt('Enter Dustbin Latitude:');
+	
+	if (!number || !location || !longitude || !latitude) return;
+	
+	const dustbinCard = document.createElement('div');
+	dustbinCard.classList.add('dustbin-card');
+	dustbinCard.setAttribute('data-name', number);
+	
+	dustbinCard.innerHTML = `
+	<img src="https://via.placeholder.com/50" alt="Dustbin Image">
+	<div class="dustbin-info">
+	<h3>${number}</h3>
+	<p>Location: ${location}</p>
+	</div>
+	<div class="dustbin-status">
+	<span class="status-label low-status">Low</span>
+	<p>Fill Level: 0%</p>
+	<div class="fill-level-bar">
+	<div style="width: 0%;"></div>
+	</div>
+	<p>Longitude: ${longitude}</p>
+	<p>Latitude: ${latitude}</p>
+	<input type="checkbox" data-lat="${latitude}" data-lon="${longitude}">
+	<label>Select Dustbin</label>
+	</div>
+	`;
+	document.querySelector('.container').appendChild(dustbinCard); // Append to existing container
+	
+	});
+	
+	// Remove Dustbin
+	document.getElementById('removeDustbinButton').addEventListener('click', function () {
+	const nameToRemove = prompt('Enter Dustbin Number to Remove:');
+	if (!nameToRemove) return;
+	
+	const dustbins = document.querySelectorAll('.dustbin-card');
+	let removed = false;
+	
+	dustbins.forEach(dustbin => {
+	if (dustbin.getAttribute('data-name') === nameToRemove) {
+	dustbin.remove();
+	removed = true;
+	}
+	});
+	
+	if (!removed) {
+	alert('Dustbin not found.');
+	}
+	document.querySelector('.container').appendChild(dustbinCard); // Append to existing container
+	});
+	</script>
+	</body>
+	</html>
