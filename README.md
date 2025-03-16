@@ -1,9 +1,9 @@
 # Smart Dustbin Management System
 
-The **Smart Dustbin Management System** is a web-based application designed to monitor and manage the fill levels of dustbins in a city or campus. It helps to optimize waste collection routes and improve waste management efficiency.
+The **Smart Dustbin Management System** is a web-based application designed to monitor and manage the fill levels of Smart module Enabled dustbins in a city or campus. It helps to optimize waste collection routes and improve waste management efficiency.
 
 ## Features
-
+- **SmartMdodule**: Each Dustbin has a module installed in inside of the bin,It consists of ESP32 and HCSRO4 Sensors to calculate the fill level of the bin.
 - **Real-Time Dustbin Monitoring**: Displays the current fill levels of dustbins with visual indicators.
 - **Optimized Route Calculation**: Allows users to select dustbins and calculates the most efficient route for collection.
 - **Fill Level Status**: Visual bars and color-coded labels indicate dustbin status (Low, Medium, High).
