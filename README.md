@@ -1,2 +1,2 @@
 # Smartdustbin
-Smartdustbin
+SmartdustbinManagement
