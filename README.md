@@ -24,7 +24,8 @@ The **Smart Dustbin Management System** is a web-based application designed to m
 ## Tech Stack
 - **Arduino/C++: For Developing smart module that can take readings of Dustbin Fill Level
 - **HTML/CSS**: For building the structure and style of the web application.
-- **JavaScript**: To handle the interaction logic and map integration.
+- **JavaScript**:To handle the interaction logic and map integration.
+- **Node.Js**: To Handle server side components and register the data sent by modules.
 - **Google Maps API**: For rendering maps and calculating optimized routes.
   
 ## Installation and Setup
