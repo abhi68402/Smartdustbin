@@ -13,7 +13,7 @@ The **Smart Dustbin Management System** is a web-based application designed to m
   ![alt image](https://github.com/abhi68402/Smartdustbin/blob/main/WhatsApp%20Image%202024-12-09%20at%2020.37.18_a2862218.jpg?raw=true)
 
 - **Real-Time Dustbin Monitoring**: Displays the current fill levels of dustbins tracked as per our modules.
-- 
+
   ![Module and its installation](https://github.com/abhi68402/Smartdustbin/blob/main/Screenshot%202025-03-16%20at%2021-52-47%20GITAM%20Waste%20Bins%20%E2%80%93%20Google%20My%20Maps.png?raw=true)
  
 - **Optimized Route Calculation**: Allows users to select dustbins and calculates the most efficient route for collection.
