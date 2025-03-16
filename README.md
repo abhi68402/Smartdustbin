@@ -6,6 +6,8 @@ The **Smart Dustbin Management System** is a web-based application designed to m
 - **SmartMdodule**: Each Dustbin has a module installed in inside of the bin,It consists of ESP32 and HCSRO4 Sensors to calculate the fill level of the bin.
      
   ![Module and its installation](https://github.com/abhi68402/Smartdustbin/blob/main/Screenshot%202025-03-16%20213547.png?raw=true)
+  
+  ![alt image](https://github.com/abhi68402/Smartdustbin/blob/main/WhatsApp%20Image%202024-12-09%20at%2020.37.18_a2862218.jpg?raw=true)
 
 - **Real-Time Dustbin Monitoring**: Displays the current fill levels of dustbins with visual indicators.
 - **Optimized Route Calculation**: Allows users to select dustbins and calculates the most efficient route for collection.
